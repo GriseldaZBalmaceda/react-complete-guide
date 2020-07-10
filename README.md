@@ -9,3 +9,7 @@ Learned about stateful and stateless components.
 Learned about props and how to update state.
 Learned about the useState hook that is available in the new version of react that allows functional component to use state.
 Learned how to reference methods between components.
+
+June 9th Commit
+----------------
+Did the first challenge and created two components and practiced using props, event handlers and two way binding. 

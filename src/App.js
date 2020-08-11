@@ -9,7 +9,8 @@ state = {
     {name: 'Max', age:21},
     {name: 'Debbie', age:23}
   ],
-  userName: 'cool user name'
+  userName: 'cool user name',
+  showPersons: false
 }
 
 
@@ -37,6 +38,11 @@ userNameChangedHandler = (event)=>{
   })
 }
 
+togglePerson = () => {
+  let currentShow = this.state.showPersons
+  this.setState({showPersons: !currentShow})
+}
+
   render() {
 
     const style = {
@@ -52,17 +58,26 @@ userNameChangedHandler = (event)=>{
     return (
       <div className="App">
         <h1>Hello</h1>
+        <button onClick={this.togglePerson}> Toggle Persons </button>
         <button 
         style={style}
         onClick={()=>this.switchNameHandler('Maxie')}>Switch Name</button>
-        <Person 
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          click={this.switchNameHandler.bind(this, 'Maxie')}
-          changed={this.nameChangedHandler}
-          >
-        </Person>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}> My hobbies are knitting and golfing</Person>
+        {this.state.showPersons ? 
+          <div>  
+            <Person 
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+              click={this.switchNameHandler.bind(this, 'Maxie')}
+              changed={this.nameChangedHandler}
+              >
+            </Person>
+            <Person 
+              name={this.state.persons[1].name} 
+              age={this.state.persons[1].age}> 
+              My hobbies are knitting and golfing
+            </Person>
+        </div> : '' }
+
 
       <h1>Practice 1</h1>
       <UserInput change={this.userNameChangedHandler} value={this.state.userName}></UserInput>

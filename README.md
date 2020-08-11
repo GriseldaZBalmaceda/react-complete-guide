@@ -13,3 +13,7 @@ Learned how to reference methods between components.
 June 9th Commit
 ----------------
 Did the first challenge and created two components and practiced using props, event handlers and two way binding. 
+
+June 10th Commit
+----------------
+Going over how to conditionally display content using a terniary expression.

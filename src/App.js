@@ -5,6 +5,7 @@ import UserInput from './UserInput/UserInput'
 import UserOutput from './UserOutput/UserOutput'
 import ValidateCharacters from './ValidationChar/ValidationChar.jsx'
 import Character from './Characters/CharComponent'
+import Radium, {StyleRoot} from 'radium'
 class App extends Component {
 state = {
   persons : [
@@ -54,33 +55,40 @@ togglePerson = () => {
 }
 
 addCharacters = (event) => {
-let character = event.target.value
-this.setState({character: character})
+  let character = event.target.value
+  this.setState({character: character})
 }
 removeCharacter = (index) => {
-let character = this.state.character.split('')
-character.splice(index, 1);
-let newCharacter = character.join('')
-this.setState({character: newCharacter})
+  let character = this.state.character.split('')
+  character.splice(index, 1);
+  let newCharacter = character.join('')
+  this.setState({character: newCharacter})
 }
 
   render() {
 
     const style = {
-      bakgroundColor: 'white',
+      backgroundColor: 'green',
+      color:'white',
       font:'inherit',
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer',
+      ':hover' : {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     }
 
     let persons = this.state.persons.map(person => {
       return <Person key={person.id} name={person.name} age={person.age} changed={(event) => this.nameChangedHandler(event, person.id)} />
-    })
+    });
+
     let charactersArray = this.state.character.split('')
     let characterOutput =  charactersArray.map((element,index)=> <Character key={index} text={element} clicked={()=>this.removeCharacter(index)}> </Character>)
     return (
-      <div className="App">
+      <StyleRoot>
+       <div className="App">
         <h1>Hello</h1>
         <button onClick={this.togglePerson}> Toggle Persons </button>
         <button 
@@ -102,10 +110,12 @@ this.setState({character: newCharacter})
       <input onChange={(event)=>this.addCharacters(event)} />
       <ValidateCharacters textLength={this.state.character.length}> </ValidateCharacters>
       {characterOutput}
-      </div>
+      </div>       
+      </StyleRoot>
+
     );
     // return React.createElement('div', {className:'App'}, React.createElement('h1',null,'Hello'));
   }
 }
 
-export default App;
+export default Radium(App);

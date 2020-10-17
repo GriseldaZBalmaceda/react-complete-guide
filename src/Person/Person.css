@@ -5,4 +5,11 @@
     padding: 16px;
     margin-top: 10px;
     text-align: center;
+    color:Pink;
+}
+
+@media (min-width:500px) {
+    .Person {
+        width:450px;
+    }
 }

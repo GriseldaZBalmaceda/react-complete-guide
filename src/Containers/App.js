@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import './App.css';
-import Person from './Person/Person'
-import UserInput from './UserInput/UserInput'
-import UserOutput from './UserOutput/UserOutput'
-import ValidateCharacters from './ValidationChar/ValidationChar.jsx'
-import Character from './Characters/CharComponent'
-import Radium, {StyleRoot} from 'radium'
+import '../Containers/App.css';
+import Persons from  '../Components/Persons/Persons'
+// import UserInput from '../Components/UserInput/UserInput'
+// import UserOutput from '../Components/UserOutput/UserOutput'
+// import ValidateCharacters from '../Challenges/ValidationChar/ValidationChar'
+// import Character from '../Challenges/Characters/CharComponent'
+import Cockpit from '../Components/Cockpit/Cockpit'
 class App extends Component {
+
 state = {
   persons : [
     {id:'345', name: 'Max', age:21},
@@ -21,8 +22,8 @@ state = {
 switchNameHandler = (newName) =>{
   this.setState({
     persons: [
-      {name: newName, age:21},
-      {name: 'Debbie', age:23}
+      {name: newName, age:21, id: 213},
+      {name: 'Debbie', age:23, id:656}
     ]
   })
 }
@@ -66,41 +67,21 @@ removeCharacter = (index) => {
 }
 
   render() {
+    let personsTemp = null
 
-    const style = {
-      backgroundColor: 'green',
-      color:'white',
-      font:'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-      ':hover' : {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+    if(this.state.showPersons){
+      personsTemp = (<div><Persons personsArray={this.state.persons} changed={this.nameChangedHandler} /></div>)
     }
 
-    let persons = this.state.persons.map(person => {
-      return <Person key={person.id} name={person.name} age={person.age} changed={(event) => this.nameChangedHandler(event, person.id)} />
-    });
-
-    let charactersArray = this.state.character.split('')
-    let characterOutput =  charactersArray.map((element,index)=> <Character key={index} text={element} clicked={()=>this.removeCharacter(index)}> </Character>)
+    // let charactersArray = this.state.character.split('')
+    // let characterOutput =  charactersArray.map((element,index)=> <Character key={index} text={element} clicked={()=>this.removeCharacter(index)}> </Character>)
     return (
-      <StyleRoot>
        <div className="App">
-        <h1>Hello</h1>
-        <button onClick={this.togglePerson}> Toggle Persons </button>
-        <button 
-        style={style}
-        onClick={()=>this.switchNameHandler('Maxie')}>Switch Name</button>
-        {this.state.showPersons ? 
-          <div>  
-            {persons}
-        </div> : '' }
+         <Cockpit clicked={this.togglePerson} switchName={()=>this.switchNameHandler('Maxie')}/>
+          {personsTemp}
 
 
-      <h1>Practice 1</h1>
+      {/* <h1>Practice 1</h1>
       <UserInput change={this.userNameChangedHandler} value={this.state.userName}></UserInput>
       <UserOutput userName={this.state.userName}></UserOutput>
       <UserOutput></UserOutput>
@@ -109,13 +90,11 @@ removeCharacter = (index) => {
       <h2>Practice 2</h2> 
       <input onChange={(event)=>this.addCharacters(event)} />
       <ValidateCharacters textLength={this.state.character.length}> </ValidateCharacters>
-      {characterOutput}
+      {characterOutput} */}
       </div>       
-      </StyleRoot>
-
     );
     // return React.createElement('div', {className:'App'}, React.createElement('h1',null,'Hello'));
   }
 }
 
-export default Radium(App);
+export default App;

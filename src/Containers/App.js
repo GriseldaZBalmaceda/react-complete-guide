@@ -8,17 +8,30 @@ import Persons from  '../Components/Persons/Persons'
 import Cockpit from '../Components/Cockpit/Cockpit'
 class App extends Component {
 
-state = {
-  persons : [
-    {id:'345', name: 'Max', age:21},
-    {id:'800', name: 'Debbie', age:23}
-  ],
-  character:'',
-  userName: 'cool user name',
-  showPersons: false
+constructor(props) {
+  super(props);
+  console.log('[App.js] constructor')
+  this.state = {
+    persons : [
+      {id:'345', name: 'Max', age:21},
+      {id:'800', name: 'Debbie', age:23}
+    ],
+    character:'',
+    userName: 'cool user name',
+    showPersons: false
+  }
 }
 
-
+static getDerivedStateFromProps(props, state) {
+console.log('[App.js] getDerivedStateFromProps' , props)
+return state;
+}
+componentWillMount() {
+  console.log('[App.js] componentWillMount')
+}
+componentDidMount() {
+  console.log('[App.js] componentDidMount')
+}
 switchNameHandler = (newName) =>{
   this.setState({
     persons: [
@@ -67,6 +80,8 @@ removeCharacter = (index) => {
 }
 
   render() {
+    console.log('[App.js] render')
+
     let personsTemp = null
 
     if(this.state.showPersons){
@@ -77,7 +92,9 @@ removeCharacter = (index) => {
     // let characterOutput =  charactersArray.map((element,index)=> <Character key={index} text={element} clicked={()=>this.removeCharacter(index)}> </Character>)
     return (
        <div className="App">
-         <Cockpit clicked={this.togglePerson} switchName={()=>this.switchNameHandler('Maxie')}/>
+         <Cockpit
+          title={this.props.appTitle}
+          clicked={this.togglePerson} switchName={()=>this.switchNameHandler('Maxie')}/>
           {personsTemp}
 
 

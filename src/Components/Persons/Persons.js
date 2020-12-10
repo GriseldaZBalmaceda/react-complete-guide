@@ -6,16 +6,21 @@ class Persons extends Component {
     //     console.log('[Persons.js] getDerivedStateFromProps');
     //     return state;
     // }
+    // componentWillReceiveProps(props){
+    //     console.log('[Persons.js] componentWillRecieveProps', props)
+    // }
     shouldComponentUpdate(nextProps,nextState) {
         console.log('[Persons.js] shouldComponentUpdate')
         return true
     }
-    componentDidUpdate() {
-        console.log('[Persons.js] componentDidUpdate')
-    }
+
     getSnapshotBeforeUpdate(prevProps,prevState){
         console.log('[Persons.js] getSnapshotBeforeUpdate')
-        return null;
+        return {message:'Snapchat'};
+    }
+    componentDidUpdate(prevProps,prevState,snapshot) {
+        console.log('[Persons.js] componentDidUpdate')
+        console.log(snapshot)
     }
     render(){
     console.log('[Person.js] rendering...')

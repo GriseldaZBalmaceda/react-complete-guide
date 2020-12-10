@@ -1,6 +1,12 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
 const Cockpit = (props) => {
+    useEffect(()=>{
+        console.log('[Cockpit.js] useEffect');
+        setTimeout(()=> {
+            alert('saved datato cloud')
+        },1000);
+    },[]);
     return (    
         <div>
             <h1>{props.title}</h1>

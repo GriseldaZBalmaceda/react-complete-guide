@@ -18,7 +18,8 @@ constructor(props) {
     ],
     character:'',
     userName: 'cool user name',
-    showPersons: false
+    showPersons: false,
+    showCockpit: true
   }
 }
 
@@ -99,12 +100,12 @@ removeCharacter = (index) => {
     // let characterOutput =  charactersArray.map((element,index)=> <Character key={index} text={element} clicked={()=>this.removeCharacter(index)}> </Character>)
     return (
        <div className="App">
+         <button onClick={()=> {this.setState({showCockpit:false})}}>Remove Cockpit</button>
+         {this.state.showCockpit ? 
          <Cockpit
           title={this.props.appTitle}
-          clicked={this.togglePerson} switchName={()=>this.switchNameHandler('Maxie')}/>
+          clicked={this.togglePerson} switchName={()=>this.switchNameHandler('Maxie')}/> : null  }
           {personsTemp}
-
-
       {/* <h1>Practice 1</h1>
       <UserInput change={this.userNameChangedHandler} value={this.state.userName}></UserInput>
       <UserOutput userName={this.state.userName}></UserOutput>

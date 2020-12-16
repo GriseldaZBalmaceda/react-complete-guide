@@ -93,7 +93,7 @@ removeCharacter = (index) => {
     let personsTemp = null
 
     if(this.state.showPersons){
-      personsTemp = (<div><Persons personsArray={this.state.persons} changed={this.nameChangedHandler} /></div>)
+      personsTemp = (<div><Persons personsArray={this.state.persons} changed={this.nameChangedHandler.bind(this)} /></div>)
     }
 
     // let charactersArray = this.state.character.split('')
@@ -104,6 +104,7 @@ removeCharacter = (index) => {
          {this.state.showCockpit ? 
          <Cockpit
           title={this.props.appTitle}
+          personsLength={this.state.persons.length}
           clicked={this.togglePerson} switchName={()=>this.switchNameHandler('Maxie')}/> : null  }
           {personsTemp}
       {/* <h1>Practice 1</h1>

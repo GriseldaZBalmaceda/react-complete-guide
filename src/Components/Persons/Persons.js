@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import Person from  './Person/Person'
-class Persons extends Component {
+class Persons extends PureComponent {
     //part of the creation cycles
     // static getDerivedStateFromProps(props,state) {
     //     console.log('[Persons.js] getDerivedStateFromProps');
@@ -10,8 +10,9 @@ class Persons extends Component {
     //     console.log('[Persons.js] componentWillRecieveProps', props)
     // }
     shouldComponentUpdate(nextProps,nextState) {
-        console.log('[Persons.js] shouldComponentUpdate')
-        return true
+        console.log('Person.js shouldComponentUpdate')
+        var personsChanged =  nextProps.personsArray !== this.props.personsArray ? true : false
+        return personsChanged;
     }
 
     getSnapshotBeforeUpdate(prevProps,prevState){
@@ -24,7 +25,6 @@ class Persons extends Component {
     }
     componentWillUnmount(){
         console.log('[Persons.js] componentWillUnmount')
-
     }
     render(){
     console.log('[Person.js] rendering...')

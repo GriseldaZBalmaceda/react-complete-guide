@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../Containers/App.css';
 import Persons from  '../Components/Persons/Persons'
+import withClass from '../HOC/WithClass'
 // import UserInput from '../Components/UserInput/UserInput'
 // import UserOutput from '../Components/UserOutput/UserOutput'
 // import ValidateCharacters from '../Challenges/ValidationChar/ValidationChar'
@@ -99,7 +100,7 @@ removeCharacter = (index) => {
     // let charactersArray = this.state.character.split('')
     // let characterOutput =  charactersArray.map((element,index)=> <Character key={index} text={element} clicked={()=>this.removeCharacter(index)}> </Character>)
     return (
-       <div className="App">
+       <withClass classes="App">
          <button onClick={()=> {this.setState({showCockpit:false})}}>Remove Cockpit</button>
          {this.state.showCockpit ? 
          <Cockpit
@@ -117,7 +118,7 @@ removeCharacter = (index) => {
       <input onChange={(event)=>this.addCharacters(event)} />
       <ValidateCharacters textLength={this.state.character.length}> </ValidateCharacters>
       {characterOutput} */}
-      </div>       
+      </withClass>       
     );
     // return React.createElement('div', {className:'App'}, React.createElement('h1',null,'Hello'));
   }

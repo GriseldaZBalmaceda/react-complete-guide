@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import classes from  './Person.css'
 import Aux from '../../../HOC/Auxilary'
 
+// instead of aux you can also use Reacts Fragment
 class Person extends Component {
     render(){
         console.log('[Person.js] rendering')

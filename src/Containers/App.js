@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import '../Containers/App.css';
-import Persons from  '../Components/Persons/Persons'
-import withClass from '../HOC/WithClass'
+import Persons from  '../Components/Persons/Persons';
+import Aux from '../HOC/Auxilary';
+import WithClass from '../HOC/withClass';
+import classNames from './App.css'
 // import UserInput from '../Components/UserInput/UserInput'
 // import UserOutput from '../Components/UserOutput/UserOutput'
 // import ValidateCharacters from '../Challenges/ValidationChar/ValidationChar'
@@ -20,7 +21,8 @@ constructor(props) {
     character:'',
     userName: 'cool user name',
     showPersons: false,
-    showCockpit: true
+    showCockpit: true,
+    changedCounter:0
   }
 }
 
@@ -63,7 +65,7 @@ nameChangedHandler = (event, id) => {
   persons[personIndex] = person
 
 
-  this.setState({persons:persons})
+  this.setState({persons:persons, changedCounter: this.state.changedCounter + 1})
 }
 
 userNameChangedHandler = (event) => {
@@ -100,8 +102,8 @@ removeCharacter = (index) => {
     // let charactersArray = this.state.character.split('')
     // let characterOutput =  charactersArray.map((element,index)=> <Character key={index} text={element} clicked={()=>this.removeCharacter(index)}> </Character>)
     return (
-       <withClass classes="App">
-         <button onClick={()=> {this.setState({showCockpit:false})}}>Remove Cockpit</button>
+      <Aux>
+        <button onClick={()=> {this.setState({showCockpit:false})}}>Remove Cockpit</button>
          {this.state.showCockpit ? 
          <Cockpit
           title={this.props.appTitle}
@@ -118,10 +120,10 @@ removeCharacter = (index) => {
       <input onChange={(event)=>this.addCharacters(event)} />
       <ValidateCharacters textLength={this.state.character.length}> </ValidateCharacters>
       {characterOutput} */}
-      </withClass>       
+      </Aux>       
     );
     // return React.createElement('div', {className:'App'}, React.createElement('h1',null,'Hello'));
   }
 }
 
-export default App;
+export default WithClass(App, classNames.App);

@@ -1,16 +1,18 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useRef} from 'react'
 import Classes from './Cockpit.css'
 
 const Cockpit = (props) => {
+    const toggleBtnRef = useRef(null);
     const assignedClasses = [];
     //useEffect combines componentDidMount and componentDidUpdate, takes a function that runs on every render
     useEffect(()=>{
         console.log('[Cockpit.js] useEffect');
-       const timer =  setTimeout(()=> {
-            alert('saved data to cloud')
-        },1000);
+    //    const timer =  setTimeout(()=> {
+    //         alert('saved data to cloud')
+    //     },1000);
+    toggleBtnRef.current.click();
         return ()=> {
-        clearTimeout(timer)
+        // clearTimeout(timer)
         //runs after the last useEffect, similar to componentWillUmount,
         // it runs before the main useEffect function runs, but after the first render cycle
         console.log('[Cockpit.js] cleanup work in useEffect')
@@ -34,9 +36,10 @@ const Cockpit = (props) => {
         <div>
             <h1>{props.title}</h1>
             <p className={assignedClasses.join('')}>This is really working</p>
-            <button onClick={props.clicked}> Toggle Persons </button>
+            <button ref={toggleBtnRef} onClick={props.clicked}> Toggle Persons </button>
             <button 
             onClick={props.switchName}>Switch Name</button>
+            <button onClick={props.login}>Log in</button>
         </div>
     );
 };

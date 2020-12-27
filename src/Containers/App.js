@@ -65,7 +65,12 @@ nameChangedHandler = (event, id) => {
   persons[personIndex] = person
 
 
-  this.setState({persons:persons, changedCounter: this.state.changedCounter + 1})
+  this.setState((prevState,props) => {
+    return{
+      persons:persons, 
+      changedCounter: prevState.changedCounter + 1
+    };
+  });
 }
 
 userNameChangedHandler = (event) => {
@@ -108,7 +113,9 @@ removeCharacter = (index) => {
          <Cockpit
           title={this.props.appTitle}
           personsLength={this.state.persons.length}
-          clicked={this.togglePerson} switchName={()=>this.switchNameHandler('Maxie')}/> : null  }
+          clicked={this.togglePerson} 
+          switchName={()=>this.switchNameHandler('Maxie')}/> : null 
+          login={} }
           {personsTemp}
       {/* <h1>Practice 1</h1>
       <UserInput change={this.userNameChangedHandler} value={this.state.userName}></UserInput>

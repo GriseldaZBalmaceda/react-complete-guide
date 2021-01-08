@@ -22,7 +22,8 @@ constructor(props) {
     userName: 'cool user name',
     showPersons: false,
     showCockpit: true,
-    changedCounter:0
+    changedCounter: 0,
+    authenticated: false
   }
 }
 
@@ -94,14 +95,19 @@ removeCharacter = (index) => {
   let newCharacter = character.join('')
   this.setState({character: newCharacter})
 }
-
+loginHandler = () => {
+  this.setState({authenticated:true})
+}
   render() {
     console.log('[App.js] render')
 
     let personsTemp = null
 
     if(this.state.showPersons){
-      personsTemp = (<div><Persons personsArray={this.state.persons} changed={this.nameChangedHandler.bind(this)} /></div>)
+      personsTemp = (
+      <div>
+        <Persons personsArray={this.state.persons} changed={this.nameChangedHandler.bind(this)} authenticated={this.state.authenticated}/>
+      </div>)
     }
 
     // let charactersArray = this.state.character.split('')
@@ -110,13 +116,17 @@ removeCharacter = (index) => {
       <Aux>
         <button onClick={()=> {this.setState({showCockpit:false})}}>Remove Cockpit</button>
          {this.state.showCockpit ? 
-         <Cockpit
-          title={this.props.appTitle}
-          personsLength={this.state.persons.length}
-          clicked={this.togglePerson} 
-          switchName={()=>this.switchNameHandler('Maxie')}/> : null 
-          login={} }
+          <Cockpit
+            title={this.props.appTitle}
+            personsLength={this.state.persons.length}
+            clicked={this.togglePerson} 
+            switchName={()=>this.switchNameHandler('Maxie')}
+            login = {this.loginHandler }
+            /> : null
+          }
+          
           {personsTemp}
+         
       {/* <h1>Practice 1</h1>
       <UserInput change={this.userNameChangedHandler} value={this.state.userName}></UserInput>
       <UserOutput userName={this.state.userName}></UserOutput>

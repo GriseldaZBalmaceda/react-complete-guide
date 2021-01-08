@@ -11,7 +11,8 @@ class Persons extends PureComponent {
     // }
     shouldComponentUpdate(nextProps,nextState) {
         console.log('Person.js shouldComponentUpdate')
-        var personsChanged =  nextProps.personsArray !== this.props.personsArray ? true : false
+        var personsChanged =  (nextProps.personsArray !== this.props.personsArray ? true : false) || 
+        nextProps.authenticated !==this.props.authenticated ? true : false ;
         return personsChanged;
     }
 
@@ -29,11 +30,14 @@ class Persons extends PureComponent {
     render(){
     console.log('[Person.js] rendering...')
        return this.props.personsArray.map(person => {
-            return (<Person 
+            return (
+            <Person 
                 key={person.id} 
                 name={person.name} 
                 age={person.age} 
-                changed={(event) => this.props.changed(event, person.id)} />
+                changed={(event) => this.props.changed(event, person.id)} 
+                authenticated = {this.props.authenticated}
+            />
             )
         });
     }

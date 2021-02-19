@@ -1,6 +1,6 @@
-import React, {PureComponent} from 'react'
+import React, {Component} from 'react'
 import Person from  './Person/Person'
-class Persons extends PureComponent {
+class Persons extends Component {
     //part of the creation cycles
     // static getDerivedStateFromProps(props,state) {
     //     console.log('[Persons.js] getDerivedStateFromProps');
@@ -36,7 +36,6 @@ class Persons extends PureComponent {
                 name={person.name} 
                 age={person.age} 
                 changed={(event) => this.props.changed(event, person.id)} 
-                authenticated = {this.props.authenticated}
             />
             )
         });

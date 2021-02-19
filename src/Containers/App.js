@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Persons from  '../Components/Persons/Persons';
 import Aux from '../HOC/Auxilary';
 import WithClass from '../HOC/withClass';
-import classNames from './App.css'
+import classNames from './App.css';
+import AuthContext from '../Context/auth.context'
 // import UserInput from '../Components/UserInput/UserInput'
 // import UserOutput from '../Components/UserOutput/UserOutput'
 // import ValidateCharacters from '../Challenges/ValidationChar/ValidationChar'
@@ -115,17 +116,23 @@ loginHandler = () => {
     return (
       <Aux>
         <button onClick={()=> {this.setState({showCockpit:false})}}>Remove Cockpit</button>
-         {this.state.showCockpit ? 
-          <Cockpit
-            title={this.props.appTitle}
-            personsLength={this.state.persons.length}
-            clicked={this.togglePerson} 
-            switchName={()=>this.switchNameHandler('Maxie')}
-            login = {this.loginHandler }
-            /> : null
-          }
-          
-          {personsTemp}
+         <AuthContext.Provider 
+         value={{
+           authenticated: this.state.authenticated,
+           login: this.loginHandler
+          }}>
+            {this.state.showCockpit ? 
+            <Cockpit
+              title={this.props.appTitle}
+              personsLength={this.state.persons.length}
+              clicked={this.togglePerson} 
+              switchName={()=>this.switchNameHandler('Maxie')}
+              login = {this.loginHandler }
+              /> : null
+            }
+            {personsTemp}  
+         </AuthContext.Provider>
+   
          
       {/* <h1>Practice 1</h1>
       <UserInput change={this.userNameChangedHandler} value={this.state.userName}></UserInput>

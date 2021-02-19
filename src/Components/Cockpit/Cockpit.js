@@ -1,8 +1,9 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useContext} from 'react'
 import Classes from './Cockpit.css'
-
+import AuthContext from '../../Context/auth.context'
 const Cockpit = (props) => {
     const toggleBtnRef = useRef(null);
+    const authContext = useContext(AuthContext)
     const assignedClasses = [];
     //useEffect combines componentDidMount and componentDidUpdate, takes a function that runs on every render
     useEffect(()=>{
@@ -39,7 +40,12 @@ const Cockpit = (props) => {
             <button ref={toggleBtnRef} onClick={props.clicked}> Toggle Persons </button>
             <button 
             onClick={props.switchName}>Switch Name</button>
-            <button onClick={props.login}>Log in</button>
+            {/* <AuthContext.Consumer>
+               {context=> <button onClick={context.login}>Log in</button>} 
+            </AuthContext.Consumer> */}
+            <button onClick={authContext.login}>Log in</button>
+
+
         </div>
     );
 };
